@@ -7,3 +7,13 @@ function printResult(num: number) {
 }
 
 printResult(add(5, 12));
+
+// let someValue: undefined;
+
+let combineValues: (a: number, b: number) => number;
+
+combineValues = add;
+// combineValues = 5;
+// combineValues = printResult;
+
+console.log(combineValues(8, 8));
