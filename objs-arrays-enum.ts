@@ -10,8 +10,8 @@
 // };
 
 enum Role {
-  ADMIN = 'ADMIN',
-  READ_ONLY = 100,
+  ADMIN,
+  READ_ONLY,
   AUTHOR,
 }
 
@@ -21,9 +21,9 @@ const person = {
   hobbies: ['Sports', 'Cooking'],
   role: Role.AUTHOR,
 };
-let favoriteActivities: string[];
-favoriteActivities = ['Sports'];
-console.log(person.name);
+// let favoriteActivities: string[];
+// favoriteActivities = ['Sports'];
+// console.log(person.name);
 
 if (person.role === Role.AUTHOR) {
   console.log('is author');

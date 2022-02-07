@@ -11,9 +11,9 @@
 // };
 var Role;
 (function (Role) {
-    Role["ADMIN"] = "ADMIN";
-    Role[Role["READ_ONLY"] = 100] = "READ_ONLY";
-    Role[Role["AUTHOR"] = 101] = "AUTHOR";
+    Role[Role["ADMIN"] = 0] = "ADMIN";
+    Role[Role["READ_ONLY"] = 1] = "READ_ONLY";
+    Role[Role["AUTHOR"] = 2] = "AUTHOR";
 })(Role || (Role = {}));
 const person = {
     name: 'Milan',
@@ -21,9 +21,9 @@ const person = {
     hobbies: ['Sports', 'Cooking'],
     role: Role.AUTHOR,
 };
-let favoriteActivities;
-favoriteActivities = ['Sports'];
-console.log(person.name);
+// let favoriteActivities: string[];
+// favoriteActivities = ['Sports'];
+// console.log(person.name);
 if (person.role === Role.AUTHOR) {
     console.log('is author');
 }
