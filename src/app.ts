@@ -1,17 +1,18 @@
-const userName = 'Milan';
-// userName = 'Milance';
-let age = 30;
+class Department {
+  name: string;
 
-age = 28;
-
-function add(a: number, b: number) {
-  var result;
-
-  result = a + b;
-  return result;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe(this: Department) {
+    console.log('Department:' + this.name);
+  }
 }
 
-const printOutput: (a: number | string) => void = (output) =>
-  console.log(output);
+const accounting = new Department('Accounting');
+console.log(accounting);
 
-printOutput(add(7, 4));
+accounting.describe();
+
+const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+accountingCopy.describe();
