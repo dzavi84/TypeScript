@@ -66,6 +66,13 @@ class AccountingDepartment extends Department {
     describe() {
         console.log('Accounting Department -ID' + this.id);
     }
+    static getInstance() {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment('d2', []);
+        return this.instance;
+    }
 }
 const employee1 = Department.createEmployee('Igor');
 console.log(employee1, Department.fiscalYear);
@@ -78,7 +85,10 @@ it.printEmployeeInformation();
 // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
 // accountingCopy.describe();
 console.log(it);
-const accounting = new AccountingDepartment('d2', []);
+// const accounting = new AccountingDepartment('d2', []);
+const accounting = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+console.log(accounting, accounting2);
 accounting.mostRecentReport = 'Year end report';
 accounting.addReport('Something went wrong...');
 console.log(accounting.mostRecentReport);
