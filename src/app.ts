@@ -1,28 +1,75 @@
-interface Greetable {
+type Admin = {
   name: string;
+  privileges: string[];
+};
 
-  greet(phrase: string): void;
-}
-
-class Person implements Greetable {
+type Employee = {
   name: string;
-  age = 30;
-  nickname: string;
+  startDate: Date;
+};
 
-  constructor(n: string, nik: string) {
-    this.name = n;
-    this.nickname = nik;
+type ElevetedEmployee = Admin & Employee;
+// interface ElevetedEmployee extends Admin, Employee {}
+
+const e1: ElevetedEmployee = {
+  name: 'Milan',
+  privileges: ['create-server'],
+  startDate: new Date(),
+};
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
   }
 
-  greet(phrase: string) {
-    console.log(phrase + ' ' + this.name);
+  return a + b;
+}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInfo(emp: UnknownEmployee) {
+  if ('privileges' in emp) {
+    console.log('Privileges:' + emp.privileges);
+  }
+  if ('privileges' in emp) {
+    console.log('Name' + emp.name);
   }
 }
 
-let user1: Greetable;
+printEmployeeInfo(e1);
 
-user1 = new Person('Milan', 'Vidza');
+class Car {
+  drive() {
+    console.log('Driving...');
+  }
+}
 
-user1.greet('Hi there - I am');
+class Truck {
+  drive() {
+    console.log('Driving a Truck...');
+  }
 
-console.log(user1);
+  loadCargo(amoung: number) {
+    console.log('Loading cargo' + amoung);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+useVehicle(v1);
+useVehicle(v2);
