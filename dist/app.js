@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 // interface ElevetedEmployee extends Admin, Employee {}
 const e1 = {
     name: 'Milan',
@@ -13,6 +14,15 @@ function add(a, b) {
 }
 const result = add('Milan', 1);
 result.split(' ');
+const fetchUserData = {
+    id: 'u1',
+    name: 'Milan',
+    job: { title: 'CEO', description: 'My own company' },
+};
+console.log((_a = fetchUserData === null || fetchUserData === void 0 ? void 0 : fetchUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+const userInput = '';
+const storeData = userInput !== null && userInput !== void 0 ? userInput : 'DEFAULT';
+console.log(storeData);
 // type UnknownEmployee = Employee | Admin;
 // function printEmployeeInfo(emp: UnknownEmployee) {
 //   if ('privileges' in emp) {
