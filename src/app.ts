@@ -11,3 +11,13 @@
 // promise.then((data) => {
 //   data.split(' ');
 // });
+
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+// console.log(merge({ name: 'Milan' }, { age: 37 }));
+
+const mergedObj = merge({ name: 'Milan', hobbies: ['sport'] }, { age: 37 });
+const mergedObj2 = merge({ name: 'Milan' }, { age: 37 });
+console.log(mergedObj.age);
