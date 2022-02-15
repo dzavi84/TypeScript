@@ -57,8 +57,13 @@ const numberStorage = new DataStorage();
 numberStorage.addItem(12);
 numberStorage.addItem('Vidanovic');
 console.log(numberStorage.getItems());
-// const objStorage = new DataStorage<object>();
-// objStorage.addItem({ name: 'Milan' });
-// objStorage.addItem({ name: 'Ana' });
-// objStorage.removeItem({ name: 'Ana' });
-// console.log(objStorage.getItems());
+function createCourseGoal(title, description, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+const names = ['Milan', 'Anna'];
+// names.push('Nikolina');
+// names.pop();

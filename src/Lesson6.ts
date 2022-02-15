@@ -134,16 +134,16 @@ console.log(storeData);
 //   username: 'Must start with a capital character',
 // };
 
-interface CourseGoal {
-  title: string;
-  description: string;
-  completeUnion: Date;
-}
+// interface CourseGoal {
+//   title: string;
+//   description: string;
+//   completeUnion: Date;
+// }
 
-function createCourseGoal(
-  title: string,
-  description: string,
-  date: Date
-): CourseGoal {
-  return { title: title, description: description, completeUnion: date };
-}
+// function createCourseGoal(
+//   title: string,
+//   description: string,
+//   date: Date
+// ): CourseGoal {
+//   return { title: title, description: description, completeUnion: date };
+// }
