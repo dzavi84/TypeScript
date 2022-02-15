@@ -27,3 +27,38 @@ function countAndDescribe(element) {
     return [element, descriptionText];
 }
 console.log(countAndDescribe('Hi there!'));
+function extractAndConvert(obj, key) {
+    return obj[key];
+}
+extractAndConvert({ name: 'Milan' }, 'name');
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
+    }
+}
+const textStorage = new DataStorage();
+textStorage.addItem('Milan');
+textStorage.addItem('Ana');
+textStorage.removeItem('Milan');
+console.log(textStorage.getItems());
+const numberStorage = new DataStorage();
+numberStorage.addItem(12);
+numberStorage.addItem('Vidanovic');
+console.log(numberStorage.getItems());
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({ name: 'Milan' });
+// objStorage.addItem({ name: 'Ana' });
+// objStorage.removeItem({ name: 'Ana' });
+// console.log(objStorage.getItems());
