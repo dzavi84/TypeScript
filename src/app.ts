@@ -95,3 +95,31 @@ class Product {
 
 const p1 = new Product('Book', 19);
 const p2 = new Product('Book 2', 29);
+
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const ajsDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+  return ajsDescriptor;
+}
+
+class Printer {
+  message = 'This work';
+
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const p = new Printer();
+
+const button = document.querySelector('button')!;
+// ! znaci da button postoji da nije null
+button.addEventListener('click', p.showMessage);
