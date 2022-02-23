@@ -1,168 +1,116 @@
-function Logger(logString: string) {
-  console.log('LOGGER FACTORY');
-  return function (constructor: Function) {
-    console.log(logString);
-    console.log(constructor);
-  };
-}
+abstract class Department {
+  static fiscalYear = 2022;
+  // private id: string;
+  // private name: string;
+  protected employees: string[] = [];
 
-function WithTemplate(template: string, hookId: string) {
-  console.log('TEMPLATE FACTORY');
-  return function <T extends { new (...args: any[]): { name: string } }>(
-    originalConstructor: T
-  ) {
-    return class extends originalConstructor {
-      constructor(..._: any[]) {
-        super();
-        console.log('Rendering template');
-        const hookEl = document.getElementById(hookId);
-        if (hookEl) {
-          hookEl.innerHTML = template;
-          hookEl.querySelector('h1')!.textContent = this.name;
-        }
-      }
-    };
-  };
-}
-
-// @Logger('LOGGING-PERSON')
-@Logger('Logging!!')
-@WithTemplate('<h1>My Person Object</h1>', 'app')
-class Person {
-  name = 'Milan';
-
-  constructor() {
-    console.log('Creating person obj...');
+  constructor(protected readonly id: string, public name: string) {
+    // this.name = n;
+    // this.id = id;
   }
+
+  static createEmployee(name: string) {
+    return { name: name };
+  }
+
+  abstract describe(this: Department): void;
 }
 
-const pers = new Person();
-console.log(pers);
+class AccountingDepartment extends Department {
+  private lastReport: string;
 
-// ---
+  private static instance: AccountingDepartment;
 
-function Log(target: any, propertyName: string | symbol) {
-  console.log('Property decorator!');
-  console.log(target, propertyName);
-}
-
-function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
-  console.log('Accessor decorator!');
-  console.log(target);
-  console.log(name);
-  console.log(descriptor);
-}
-
-function Log3(
-  target: any,
-  name: string | symbol,
-  descriptor: PropertyDescriptor
-) {
-  console.log('Method decorator!');
-  console.log(target);
-  console.log(name);
-  console.log(descriptor);
-}
-
-function Log4(target: any, name: string | symbol, position: number) {
-  console.log('Parameter decorator!');
-  console.log(target);
-  console.log(name);
-  console.log(position);
-}
-class Product {
-  @Log
-  title: string;
-  private _price: number;
-  @Log2
-  set price(val: number) {
-    if (val > 0) {
-      this._price = val;
-    } else {
-      throw new Error('Invalid price-should be positive!');
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
     }
+    throw new Error('No report found!');
   }
 
-  constructor(t: string, p: number) {
-    this.title = t;
-    this._price = p;
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error('Please pass a valid value!');
+    }
+
+    this.addReport(value);
   }
-  @Log3
-  getPriceWithTax(@Log4 tax: number) {
-    return this._price * (1 + tax);
+
+  private constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting');
+    this.lastReport = reports[0];
   }
-}
-
-const p1 = new Product('Book', 19);
-const p2 = new Product('Book 2', 29);
-
-function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  const ajsDescriptor: PropertyDescriptor = {
-    configurable: true,
-    enumerable: false,
-    get() {
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
-    },
-  };
-  return ajsDescriptor;
-}
-
-class Printer {
-  message = 'This work';
-
-  @Autobind
-  showMessage() {
-    console.log(this.message);
+  addEmployee(name: string) {
+    if (name === 'Milan') {
+      return;
+    }
+    this.employees.push(name);
   }
-}
 
-const p = new Printer();
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
 
-const button = document.querySelector('button')!;
-// ! znaci da button postoji da nije null
-button.addEventListener('click', p.showMessage);
-
-// --
-
-
-interface ValidatorConfig{
-  [property:string]:
-}
-
-function Required() {}
-
-function PositiveNumber() {}
-
-function Validate(obj: object) {}
-
-class Course {
-  @Required
-  title: string;
-  @PositiveNumber
-  price: number;
-
-  constructor(t: string, p: number) {
-    this.title = t;
-    this.price = p;
+  printReports() {
+    console.log(this.reports);
+  }
+  describe() {
+    console.log('Accounting Department -ID' + this.id);
+  }
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment('d2', []);
+    return this.instance;
   }
 }
-
-const courseForm = document.querySelector('form')!;
-courseForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const titleEL = document.getElementById('title') as HTMLInputElement;
-  const priceEl = document.getElementById('price') as HTMLInputElement;
-
-  const title = titleEL.value;
-  const price = +priceEl.value;
-
-  const createdCourse = new Course(title, price);
-  if (!Validate(createdCourse)) {
-    alert('invalid input, please try again!');
-    return;
+class ItDepartment extends Department {
+  admin: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, 'IT');
+    this.admin = admins;
   }
+  describe() {
+    console.log('ITI Department' + this.id);
+  }
+}
+const employee1 = Department.createEmployee('Igor');
+console.log(employee1, Department.fiscalYear);
 
-  console.log(createdCourse);
-});
+// const it = new AccountingDepartment('id', ['Milan']);
+
+// it.addEmployee('Max');
+// it.addEmployee('Milan');
+
+// console.log(it);
+
+// it.describe();
+// it.printEmployeeInformation();
+
+// // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+// // accountingCopy.describe();
+
+// console.log(it);
+
+// const accounting = new AccountingDepartment('d2', []);
+
+const accounting = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+console.log(accounting, accounting2);
+
+accounting.mostRecentReport = 'Year end report';
+
+accounting.addReport('Something went wrong...');
+
+console.log(accounting.mostRecentReport);
+
+accounting.addEmployee('Milan');
+accounting.addEmployee('Maximilian');
+
+// accounting.printReports();
+// accounting.printEmployeeInformation();
+accounting.describe();
+const it = new ItDepartment(' 123', ['mica', 'igorce']);
+console.log(it.describe());

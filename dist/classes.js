@@ -12,26 +12,11 @@ class Department {
     static createEmployee(name) {
         return { name: name };
     }
-    // console.log(`Department (${this.id}):${this.name}`);
-    addEmployee(employee) {
-        this.employees.push(employee);
-        // this.id = 'd2';
-    }
-    printEmployeeInformation() {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    }
-}
-Department.fiscalYear = 2022;
-class ITDepartment extends Department {
-    constructor(id, admins) {
-        super(id, 'IT');
-        this.admins = admins;
-    }
     describe() {
         console.log('IT Department - ID' + this.id);
     }
 }
+Department.fiscalYear = 2022;
 class AccountingDepartment extends Department {
     constructor(id, reports) {
         super(id, 'Accounting');
@@ -76,15 +61,15 @@ class AccountingDepartment extends Department {
 }
 const employee1 = Department.createEmployee('Igor');
 console.log(employee1, Department.fiscalYear);
-const it = new ITDepartment('id', ['Milan']);
-it.addEmployee('Max');
-it.addEmployee('Milan');
-console.log(it);
-it.describe();
-it.printEmployeeInformation();
-// const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
-// accountingCopy.describe();
-console.log(it);
+// const it = new AccountingDepartment('id', ['Milan']);
+// it.addEmployee('Max');
+// it.addEmployee('Milan');
+// console.log(it);
+// it.describe();
+// it.printEmployeeInformation();
+// // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+// // accountingCopy.describe();
+// console.log(it);
 // const accounting = new AccountingDepartment('d2', []);
 const accounting = AccountingDepartment.getInstance();
 const accounting2 = AccountingDepartment.getInstance();
