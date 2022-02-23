@@ -13,27 +13,6 @@ abstract class Department {
     return { name: name };
   }
 
-  abstract describe(this: Department): void;
-  // console.log(`Department (${this.id}):${this.name}`);
-
-  addEmployee(employee: string) {
-    this.employees.push(employee);
-    // this.id = 'd2';
-  }
-
-  printEmployeeInformation() {
-    console.log(this.employees.length);
-    console.log(this.employees);
-  }
-}
-
-class ITDepartment extends Department {
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    super(id, 'IT');
-    this.admins = admins;
-  }
-
   describe() {
     console.log('IT Department - ID' + this.id);
   }
@@ -93,20 +72,20 @@ class AccountingDepartment extends Department {
 const employee1 = Department.createEmployee('Igor');
 console.log(employee1, Department.fiscalYear);
 
-const it = new ITDepartment('id', ['Milan']);
+// const it = new AccountingDepartment('id', ['Milan']);
 
-it.addEmployee('Max');
-it.addEmployee('Milan');
+// it.addEmployee('Max');
+// it.addEmployee('Milan');
 
-console.log(it);
+// console.log(it);
 
-it.describe();
-it.printEmployeeInformation();
+// it.describe();
+// it.printEmployeeInformation();
 
-// const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
-// accountingCopy.describe();
+// // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+// // accountingCopy.describe();
 
-console.log(it);
+// console.log(it);
 
 // const accounting = new AccountingDepartment('d2', []);
 

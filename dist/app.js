@@ -123,3 +123,19 @@ const p = new Printer();
 const button = document.querySelector('button');
 // ! znaci da button postoji da nije null
 button.addEventListener('click', p.showMessage);
+class Course {
+    constructor(t, p) {
+        this.title = t;
+        this.price = p;
+    }
+}
+const courseForm = document.querySelector('form');
+courseForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const titleEL = document.getElementById('title');
+    const priceEl = document.getElementById('price');
+    const title = titleEL.value;
+    const price = +priceEl.value;
+    const createdCourse = new Course(title, price);
+    console.log(createdCourse);
+});

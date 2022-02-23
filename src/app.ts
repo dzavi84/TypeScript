@@ -123,3 +123,46 @@ const p = new Printer();
 const button = document.querySelector('button')!;
 // ! znaci da button postoji da nije null
 button.addEventListener('click', p.showMessage);
+
+// --
+
+
+interface ValidatorConfig{
+  [property:string]:
+}
+
+function Required() {}
+
+function PositiveNumber() {}
+
+function Validate(obj: object) {}
+
+class Course {
+  @Required
+  title: string;
+  @PositiveNumber
+  price: number;
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
+  }
+}
+
+const courseForm = document.querySelector('form')!;
+courseForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const titleEL = document.getElementById('title') as HTMLInputElement;
+  const priceEl = document.getElementById('price') as HTMLInputElement;
+
+  const title = titleEL.value;
+  const price = +priceEl.value;
+
+  const createdCourse = new Course(title, price);
+  if (!Validate(createdCourse)) {
+    alert('invalid input, please try again!');
+    return;
+  }
+
+  console.log(createdCourse);
+});
