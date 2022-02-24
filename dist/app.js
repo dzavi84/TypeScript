@@ -1,4 +1,8 @@
 "use strict";
+let add1;
+add1 = (n1, n2) => {
+    return n1 + n2;
+};
 class Person {
     constructor(n) {
         this.age = 30;
