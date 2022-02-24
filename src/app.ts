@@ -1,3 +1,19 @@
+interface Greetable {
+  name: string;
+  greet(phrase: string): void;
+}
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+  greet(phrase: string) {
+    console.log(phrase + '' + this.name);
+  }
+}
+
 abstract class Department {
   static fiscalYear = 2022;
   // private id: string;
@@ -114,3 +130,8 @@ accounting.addEmployee('Maximilian');
 accounting.describe();
 const it = new ItDepartment(' 123', ['mica', 'igorce']);
 console.log(it.describe());
+
+let user1;
+user1 = new Person('Milancic');
+user1.greet('Cao drugarcicu ');
+console.log(user1);

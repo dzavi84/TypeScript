@@ -1,4 +1,13 @@
 "use strict";
+class Person {
+    constructor(n) {
+        this.age = 30;
+        this.name = n;
+    }
+    greet(phrase) {
+        console.log(phrase + '' + this.name);
+    }
+}
 class Department {
     constructor(id, name) {
         this.id = id;
@@ -90,3 +99,7 @@ accounting.addEmployee('Maximilian');
 accounting.describe();
 const it = new ItDepartment(' 123', ['mica', 'igorce']);
 console.log(it.describe());
+let user1;
+user1 = new Person('Milancic');
+user1.greet('Cao drugarcicu ');
+console.log(user1);
